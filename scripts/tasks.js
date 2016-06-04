@@ -7,6 +7,9 @@ exports.replaceWebpack = () => {
   }, {
     from: 'webpack/replace/log-apply-result.js',
     to: 'node_modules/webpack/hot/log-apply-result.js'
+  }, {
+    from: 'webpack/replace/client.js',
+    to: 'node_modules/webpack-hot-middleware/client.js'
   }];
 
   replaceTasks.forEach(task => cp(task.from, task.to));
