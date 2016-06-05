@@ -64,12 +64,11 @@ const baseDevConfig = () => ({
 const injectPageConfig = baseDevConfig();
 injectPageConfig.entry = [
   customPath,
-  'webpack-hot-middleware/client?/__webpack_hmr_for_injectpage',
   path.join(__dirname, '../chrome/extension/inject')
 ];
-injectPageConfig.hotMiddleware = {
-  path: '/js/__webpack_hmr_for_injectpage'
-};
+delete injectPageConfig.hotMiddleware;
+delete injectPageConfig.module.loaders[0].query;
+injectPageConfig.plugins.shift(); // remove HotModuleReplacementPlugin
 injectPageConfig.output = {
   path: path.join(__dirname, '../dev/js'),
   filename: 'inject.bundle.js',
